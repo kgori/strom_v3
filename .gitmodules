@@ -1,0 +1,6 @@
+[submodule "beagle-lib"]
+	path = beagle-lib
+	url = https://github.com/beagle-dev/beagle-lib.git
+[submodule "ncl"]
+	path = ncl
+	url = https://github.com/mtholder/ncl.git
