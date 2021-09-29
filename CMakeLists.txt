@@ -1,14 +1,14 @@
 cmake_minimum_required(VERSION 3.1...3.20)
+project(strom)
 
 if(${CMAKE_VERSION} VERSION_LESS 3.12)
     cmake_policy(VERSION ${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION})
 endif()
 
-set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD 17)
 include(ExternalProject)
 
-project(strom)
-
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address -g -O1")
 
 # Add beagle as an external dependency
 ExternalProject_Add(
@@ -24,7 +24,7 @@ ExternalProject_Add(
         CMAKE_ARGS -DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>
 )
 
-add_executable(strom main.cpp node.hpp tree.hpp)
+add_executable(strom main.cpp node.hpp tree.hpp tree_manip.hpp)
 target_include_directories(strom PUBLIC beagle-lib ncl)
 
 add_dependencies(strom beagle)
