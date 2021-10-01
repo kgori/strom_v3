@@ -23,24 +23,28 @@ class Tree {
 public:
 
     Tree();
+
     ~Tree();
 
-    bool                        isRooted() const;
-    unsigned                    numLeaves() const;
-    unsigned                    numInternals() const;
-    unsigned                    numNodes() const;
+    [[nodiscard]] bool isRooted() const;
+
+    [[nodiscard]] unsigned numLeaves() const;
+
+    [[nodiscard]] unsigned numInternals() const;
+
+    [[nodiscard]] unsigned numNodes() const;
 
 private:
 
-    void                        clear();
+    void clear();
 
-    bool                        _is_rooted;
-    Node *                      _root;
-    unsigned                    _nleaves;
-    unsigned                    _ninternals;
-    Node::PtrVector             _preorder;
-    Node::PtrVector             _levelorder;
-    Node::Vector                _nodes;
+    bool _is_rooted;
+    Node *_root;
+    unsigned _nleaves;
+    unsigned _ninternals;
+    Node::PtrVector _preorder;
+    Node::PtrVector _levelorder;
+    Node::Vector _nodes;
 
 public:
 
@@ -58,7 +62,9 @@ inline Tree::~Tree() {
 
 inline void Tree::clear() {
     _is_rooted = false;
-    _root = 0;
+    _root = nullptr;
+    _nleaves = 0;
+    _ninternals = 0;
     _nodes.clear();
     _preorder.clear();
     _levelorder.clear();
@@ -77,7 +83,7 @@ inline unsigned Tree::numInternals() const {
 }
 
 inline unsigned Tree::numNodes() const {
-    return (unsigned)_nodes.size();
+    return (unsigned) _nodes.size();
 }
 
 }
