@@ -35,12 +35,12 @@ public:
 
     Node *getRightSib() { return _right_sib; }
 
-    int getNumber() const { return _number; }
+    [[nodiscard]] int getNumber() const { return _number; }
 
-    std::string getName() { return _name; }
+    [[nodiscard]] std::string getName() const { return _name; }
     //Split               getSplit()      {return _split;}
 
-    double getEdgeLength() const { return _edge_length; }
+    [[nodiscard]] double getEdgeLength() const { return _edge_length; }
 
     void setEdgeLength(double v);
 
