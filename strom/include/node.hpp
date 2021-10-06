@@ -4,9 +4,9 @@
 
 #pragma once
 
+#include <iostream>
 #include <string>
 #include <vector>
-#include <iostream>
 //#include "split.hpp"
 
 namespace strom {
@@ -50,7 +50,6 @@ public:
     typedef std::vector<Node *> PtrVector;
 
 private:
-
     void clear();
 
     Node *_left_child;
@@ -84,4 +83,4 @@ inline void Node::setEdgeLength(double v) {
     _edge_length = (v < _smallest_edge_length ? _smallest_edge_length : v);
 }
 
-}
+}// namespace strom

@@ -8,7 +8,7 @@ endif()
 set(CMAKE_CXX_STANDARD 17)
 include(ExternalProject)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address -g -O1")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address -fsanitize=undefined -fsanitize=integer -fsanitize=nullability")
 
 # Add beagle as an external dependency
 ExternalProject_Add(
@@ -24,7 +24,7 @@ ExternalProject_Add(
         CMAKE_ARGS -DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>
 )
 
-add_executable(strom main.cpp strom/include/node.hpp strom/include/tree.hpp strom/include/tree_manip.hpp)
+add_executable(strom main.cpp strom/include/node.hpp strom/include/tree.hpp strom/include/tree_manip.hpp strom/include/xstrom.hpp)
 target_include_directories(strom PUBLIC beagle-lib ncl strom/include)
 
 add_dependencies(strom beagle)
@@ -39,3 +39,5 @@ target_link_libraries(strom PRIVATE ncl)
 
 find_package(fmt CONFIG REQUIRED)
 target_link_libraries(strom PRIVATE fmt::fmt-header-only)
+
+find_package(range-v3 CONFIG REQUIRED)

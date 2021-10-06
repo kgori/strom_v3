@@ -4,9 +4,9 @@
 
 #pragma once
 
-#include <memory>
-#include <iostream>
 #include "node.hpp"
+#include <iostream>
+#include <memory>
 
 namespace strom {
 
@@ -21,7 +21,6 @@ class Tree {
     //friend class Updater;
 
 public:
-
     Tree();
 
     ~Tree();
@@ -35,7 +34,6 @@ public:
     [[nodiscard]] unsigned numNodes() const;
 
 private:
-
     void clear();
 
     bool _is_rooted;
@@ -47,7 +45,6 @@ private:
     Node::Vector _nodes;
 
 public:
-
     typedef std::shared_ptr<Tree> SharedPtr;
 };
 
@@ -86,4 +83,4 @@ inline unsigned Tree::numNodes() const {
     return (unsigned) _nodes.size();
 }
 
-}
+}// namespace strom
