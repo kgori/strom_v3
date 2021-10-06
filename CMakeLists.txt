@@ -24,7 +24,7 @@ ExternalProject_Add(
         CMAKE_ARGS -DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>
 )
 
-add_executable(strom main.cpp strom/include/node.hpp strom/include/tree.hpp strom/include/tree_manip.hpp strom/include/xstrom.hpp)
+add_executable(strom main.cpp strom/include/node.hpp strom/include/tree.hpp strom/include/tree_manip.hpp strom/include/xstrom.hpp strom/include/split.hpp)
 target_include_directories(strom PUBLIC beagle-lib ncl strom/include)
 
 add_dependencies(strom beagle)

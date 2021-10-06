@@ -4,10 +4,10 @@
 
 #pragma once
 
+#include "split.hpp"
 #include <iostream>
 #include <string>
 #include <vector>
-//#include "split.hpp"
 
 namespace strom {
 
@@ -38,7 +38,8 @@ public:
     [[nodiscard]] int getNumber() const { return _number; }
 
     [[nodiscard]] std::string getName() const { return _name; }
-    //Split               getSplit()      {return _split;}
+
+    Split getSplit() { return _split; }
 
     [[nodiscard]] double getEdgeLength() const { return _edge_length; }
 
@@ -58,7 +59,7 @@ private:
     int _number;
     std::string _name;
     double _edge_length;
-    //Split               _split;
+    Split _split;
 };
 
 inline Node::Node() {

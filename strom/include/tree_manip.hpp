@@ -41,6 +41,8 @@ public:
 
     void buildFromNewick(const std::string &newick, bool rooted, bool allow_polytomies);
 
+    void storeSplits(std::set<Split> &splitset);
+
     void rerootAtNodeNumber(int node_number);
 
     void clear();
@@ -795,6 +797,28 @@ inline void TreeManip::buildFromNewick(const std::string &newick, bool rooted, b
     } catch (XStrom &x) {
         clear();
         throw x;
+    }
+}
+
+inline void TreeManip::storeSplits(std::set<Split> &splitset) {
+    // Start by clearing and resizing all splits
+    for (auto &nd : _tree->_nodes) {
+        nd._split.resize(_tree->_nleaves);
+    }
+
+    // Now do a postorder traversal and add the bit corresponding to
+    // the current node in its parent node's split
+    for (auto nd : ranges::views::reverse(_tree->_preorder)) {
+        if (nd->_left_child) {
+            splitset.insert(nd->_split);
+        } else {
+            nd->_split.setBitAt(nd->_number);
+        }
+
+        if (nd->_parent) {
+            // Parent's bits are the union of the bits set in all of its children
+            nd->_parent->_split.addSplit(nd->_split);
+        }
     }
 }
 
