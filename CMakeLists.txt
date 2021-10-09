@@ -10,21 +10,27 @@ include(ExternalProject)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address -fsanitize=undefined -fsanitize=integer -fsanitize=nullability")
 
+message("beagle install dir = ${CMAKE_INSTALL_PREFIX}/strom_v3/beagle_install")
+message("ncl install dir = ${CMAKE_INSTALL_PREFIX}/strom_v3/ncl_install")
 # Add beagle as an external dependency
 ExternalProject_Add(
-    beagle
-    SOURCE_DIR ${CMAKE_SOURCE_DIR}/beagle-lib
-    CMAKE_ARGS -DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>
+        beagle
+        SOURCE_DIR ${CMAKE_SOURCE_DIR}/beagle-lib
+        CMAKE_ARGS -DCMAKE_INSTALL_PREFIX:PATH=<${CMAKE_INSTALL_PREFIX}>
+        CMAKE_ARGS -DCMAKE_C_COMPILER=${CMAKE_C_COMPILER}
+        CMAKE_ARGS -DCMAKE_CXX_COMPILER=${CMAKE_CXX_COMPILER}
 )
 
 # Add NCL as an external dependency
 ExternalProject_Add(
         nexus_class_library
         SOURCE_DIR ${CMAKE_SOURCE_DIR}/ncl
-        CMAKE_ARGS -DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>
+        CMAKE_ARGS -DCMAKE_INSTALL_PREFIX:PATH=<${CMAKE_INSTALL_PREFIX}>
+        CMAKE_ARGS -DCMAKE_C_COMPILER=${CMAKE_C_COMPILER}
+        CMAKE_ARGS -DCMAKE_CXX_COMPILER=${CMAKE_CXX_COMPILER}
 )
 
-add_executable(strom main.cpp strom/include/node.hpp strom/include/tree.hpp strom/include/tree_manip.hpp strom/include/xstrom.hpp strom/include/split.hpp)
+add_executable(strom main.cpp strom/include/node.hpp strom/include/tree.hpp strom/include/tree_manip.hpp strom/include/xstrom.hpp strom/include/split.hpp strom/include/tree_summary.hpp)
 target_include_directories(strom PUBLIC beagle-lib ncl strom/include)
 
 add_dependencies(strom beagle)
@@ -41,3 +47,5 @@ find_package(fmt CONFIG REQUIRED)
 target_link_libraries(strom PRIVATE fmt::fmt-header-only)
 
 find_package(range-v3 CONFIG REQUIRED)
+
+file(COPY ${CMAKE_SOURCE_DIR}/data DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
