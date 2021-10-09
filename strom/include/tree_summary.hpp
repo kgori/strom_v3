@@ -23,10 +23,6 @@ namespace strom {
 
 class TreeSummary {
 public:
-    TreeSummary() = default;
-
-    ~TreeSummary() = default;
-
     void readTreefile(const std::string &filename, unsigned skip);
 
     void showSummary() const;

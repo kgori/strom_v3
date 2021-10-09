@@ -23,8 +23,6 @@ public:
 
     explicit TreeManip(Tree::SharedPtr t);
 
-    ~TreeManip();
-
     void setTree(Tree::SharedPtr t);
 
     Tree::SharedPtr getTree();
@@ -75,18 +73,12 @@ public:
 };
 
 inline TreeManip::TreeManip() {
-    std::cout << "Constructing a TreeManip" << std::endl;
     clear();
 }
 
 inline TreeManip::TreeManip(Tree::SharedPtr t) {
-    std::cout << "Constructing a TreeManip with a supplied tree" << std::endl;
     clear();
     setTree(t);
-}
-
-inline TreeManip::~TreeManip() {
-    std::cout << "Deleting a TreeManip" << std::endl;
 }
 
 inline void TreeManip::clear() {

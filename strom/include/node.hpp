@@ -27,8 +27,6 @@ class Node {
 public:
     Node();
 
-    ~Node();
-
     Node *getParent() { return _parent; }
 
     Node *getLeftChild() { return _left_child; }
@@ -63,12 +61,7 @@ private:
 };
 
 inline Node::Node() {
-    std::cout << "Creating Node object" << std::endl;
     clear();
-}
-
-inline Node::~Node() {
-    std::cout << "Destroying Node object" << std::endl;
 }
 
 inline void Node::clear() {

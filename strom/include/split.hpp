@@ -17,14 +17,13 @@ namespace strom {
 class Split {
 public:
     Split();
-    Split(const Split &other);
-    ~Split();
 
-    Split &operator=(const Split &other);
     bool operator==(const Split &other) const;
+
     bool operator<(const Split &other) const;
 
     void clear();
+
     void resize(unsigned nleaves);
 
     typedef unsigned long split_unit_t;
@@ -34,15 +33,21 @@ public:
     typedef std::tuple<unsigned, unsigned, unsigned> split_metrics_t;
 
     [[nodiscard]] split_unit_t getBits(unsigned unit_index) const;
+
     [[nodiscard]] bool getBitAt(unsigned leaf_index) const;
+
     void setBitAt(unsigned leaf_index);
+
     void addSplit(const Split &other);
 
     [[nodiscard]] bool isEquivalent(const Split &other) const;
+
     [[nodiscard]] bool isCompatibleWith(const Split &other) const;
+
     [[nodiscard]] bool conflictsWith(const Split &other) const;
 
     [[nodiscard]] std::string createPatternRepresentation() const;
+
     [[nodiscard]] split_metrics_t getSplitMetrics() const;
 
 private:
@@ -61,31 +66,12 @@ inline Split::Split() {
     _bits_per_unit = (CHAR_BIT) * sizeof(Split::split_unit_t);
 
     clear();
-    std::cout << "Constructing a Split" << std::endl;
-}
-
-inline Split::Split(const Split &other) {
-    _mask = other._mask;
-    _nleaves = other._nleaves;
-    _bits_per_unit = (CHAR_BIT) * sizeof(Split::split_unit_t);
-    _bits = other._bits;
-    std::cout << "Constructing a Split using copy constructor" << std::endl;
-}
-
-inline Split::~Split() {
-    std::cout << "Destroying a Split" << std::endl;
 }
 
 inline void Split::clear() {
     for (auto &u : _bits) {
         u = 0L;
     }
-}
-
-inline Split &Split::operator=(const Split &other) {
-    _nleaves = other._nleaves;
-    _bits = other._bits;
-    return *this;
 }
 
 inline bool Split::operator==(const Split &other) const {

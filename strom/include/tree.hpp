@@ -23,8 +23,6 @@ class Tree {
 public:
     Tree();
 
-    ~Tree();
-
     [[nodiscard]] bool isRooted() const;
 
     [[nodiscard]] unsigned numLeaves() const;
@@ -49,12 +47,7 @@ public:
 };
 
 inline Tree::Tree() {
-    std::cout << "Constructing a Tree" << std::endl;
     clear();
-}
-
-inline Tree::~Tree() {
-    std::cout << "Destroying a Tree" << std::endl;
 }
 
 inline void Tree::clear() {
