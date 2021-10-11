@@ -8,15 +8,15 @@ endif()
 set(CMAKE_CXX_STANDARD 17)
 include(ExternalProject)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address -fsanitize=undefined -fsanitize=integer -fsanitize=nullability")
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -fsanitize=address -fsanitize=undefined -fsanitize=integer -fsanitize=nullability -fsanitize-address-use-after-scope -fno-omit-frame-pointer -O1")
 
-message("beagle install dir = ${CMAKE_INSTALL_PREFIX}/strom_v3/beagle_install")
-message("ncl install dir = ${CMAKE_INSTALL_PREFIX}/strom_v3/ncl_install")
 # Add beagle as an external dependency
 ExternalProject_Add(
         beagle
         SOURCE_DIR ${CMAKE_SOURCE_DIR}/beagle-lib
-        CMAKE_ARGS -DCMAKE_INSTALL_PREFIX:PATH=<${CMAKE_INSTALL_PREFIX}>
+        BINARY_DIR ${CMAKE_BINARY_DIR}/beagle-build
+        INSTALL_DIR ${CMAKE_BINARY_DIR}/beagle-install
+        CMAKE_ARGS -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_BINARY_DIR}/beagle-install
         CMAKE_ARGS -DCMAKE_C_COMPILER=${CMAKE_C_COMPILER}
         CMAKE_ARGS -DCMAKE_CXX_COMPILER=${CMAKE_CXX_COMPILER}
 )
@@ -25,13 +25,15 @@ ExternalProject_Add(
 ExternalProject_Add(
         nexus_class_library
         SOURCE_DIR ${CMAKE_SOURCE_DIR}/ncl
-        CMAKE_ARGS -DCMAKE_INSTALL_PREFIX:PATH=<${CMAKE_INSTALL_PREFIX}>
+        BINARY_DIR ${CMAKE_BINARY_DIR}/ncl-build
+        INSTALL_DIR ${CMAKE_BINARY_DIR}/ncl-install
+        CMAKE_ARGS -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_BINARY_DIR}/ncl-install
         CMAKE_ARGS -DCMAKE_C_COMPILER=${CMAKE_C_COMPILER}
         CMAKE_ARGS -DCMAKE_CXX_COMPILER=${CMAKE_CXX_COMPILER}
 )
 
-add_executable(strom main.cpp strom/include/node.hpp strom/include/tree.hpp strom/include/tree_manip.hpp strom/include/xstrom.hpp strom/include/split.hpp strom/include/tree_summary.hpp)
-target_include_directories(strom PUBLIC beagle-lib ncl strom/include)
+add_executable(strom main.cpp strom/include/node.hpp strom/include/tree.hpp strom/include/tree_manip.hpp strom/include/xstrom.hpp strom/include/split.hpp strom/include/tree_summary.hpp strom/include/strom.hpp)
+target_include_directories(strom PUBLIC beagle-lib ncl cli11 strom/include)
 
 add_dependencies(strom beagle)
 ExternalProject_Get_Property(beagle install_dir)
