@@ -34,7 +34,7 @@ public:
 
     void setGeneticCodeFromName(const std::string &genetic_code_name);
 
-    void setGeneticCode(const GeneticCode::SharedPtr& gcode);
+    void setGeneticCode(GeneticCode::SharedPtr gcode);
 
     [[nodiscard]] unsigned getDataType() const;
 
@@ -42,13 +42,13 @@ public:
 
     [[nodiscard]] std::string getDataTypeAsString() const;
 
-    [[nodiscard]] GeneticCode::SharedPtr getGeneticCode() const;
+    [[nodiscard]] const GeneticCode::SharedPtr getGeneticCode() const;
 
     static std::string translateDataTypeToString(unsigned datatype);
 
 private:
     unsigned _datatype{};
-    unsigned _num_states{}
+    unsigned _num_states{};
     GeneticCode::SharedPtr _genetic_code;
 
     enum DataTypes
@@ -143,13 +143,13 @@ inline std::string DataType::getDataTypeAsString() const {
 }
 
 inline std::string DataType::translateDataTypeToString(unsigned int datatype) {
-    assert(_datatype == DataTypes::NUCLEOTIDE || _datatype == DataTypes::CODON ||
-           _datatype == DataTypes::PROTEIN || _datatype == DataTypes::STANDARD);
-    if isNucleotide () {
+    assert(datatype == DataTypes::NUCLEOTIDE || datatype == DataTypes::CODON ||
+           datatype == DataTypes::PROTEIN || datatype == DataTypes::STANDARD);
+    if (datatype == DataTypes::NUCLEOTIDE) {
         return std::string("nucleotide");
-    } else if isCodon () {
+    } else if (datatype == DataTypes::CODON) {
         return std::string("codon");
-    } else if isProtein () {
+    } else if (datatype == DataTypes::PROTEIN) {
         return std::string("protein");
     } else {
         return std::string("standard");

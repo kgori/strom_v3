@@ -7,6 +7,11 @@
 #include "xstrom.hpp"
 #include <algorithm>
 #include <cctype>
+#include <iostream>
+#include <map>
+#include <vector>
+
+#include <fmt/core.h>
 
 void tolowercase(std::string &s) {
     std::transform(s.begin(), s.end(), s.begin(),
@@ -157,7 +162,7 @@ inline void GeneticCode::buildGeneticCodeTranslators() {
     }
 }
 
-inline genetic_code_names_t GeneticCode::getRecognizedGeneticCodeNames() {
+inline GeneticCode::genetic_code_names_t GeneticCode::getRecognizedGeneticCodeNames() {
     genetic_code_names_t names;
     for (const auto &[k, _] : _definitions) {
         names.push_back(k);
