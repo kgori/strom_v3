@@ -32,7 +32,7 @@ ExternalProject_Add(
         CMAKE_ARGS -DCMAKE_CXX_COMPILER=${CMAKE_CXX_COMPILER}
 )
 
-add_executable(strom main.cpp strom/include/node.hpp strom/include/tree.hpp strom/include/tree_manip.hpp strom/include/xstrom.hpp strom/include/split.hpp strom/include/tree_summary.hpp strom/include/strom.hpp strom/include/genetic_code.hpp strom/include/datatype.hpp strom/include/partition.hpp)
+add_executable(strom main.cpp strom/include/node.hpp strom/include/tree.hpp strom/include/tree_manip.hpp strom/include/xstrom.hpp strom/include/split.hpp strom/include/tree_summary.hpp strom/include/strom.hpp strom/include/genetic_code.hpp strom/include/datatype.hpp strom/include/partition.hpp strom/include/data.hpp)
 target_include_directories(strom PUBLIC beagle-lib ncl cli11 strom/include)
 
 add_dependencies(strom beagle)
