@@ -76,4 +76,4 @@ inline unsigned Tree::numNodes() const {
     return (unsigned) _nodes.size();
 }
 
-}// namespace strom
+} // namespace strom

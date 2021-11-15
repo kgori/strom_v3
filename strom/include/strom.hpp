@@ -81,4 +81,4 @@ inline void Strom::run() {
     std::cout << "Finished!" << std::endl;
 }
 
-}// namespace strom
+} // namespace strom

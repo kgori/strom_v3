@@ -77,4 +77,4 @@ inline void Node::setEdgeLength(double v) {
     _edge_length = (v < _smallest_edge_length ? _smallest_edge_length : v);
 }
 
-}// namespace strom
+} // namespace strom

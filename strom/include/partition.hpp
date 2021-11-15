@@ -205,7 +205,7 @@ void Partition::parseSubsetDefinition(std::string &s) {
     // match_obj[3] equals data type only (e.g. "codon,standard")
 
     std::string subset_name = match_obj[1].str();
-    DataType dt;// nucleotide by default
+    DataType dt; // nucleotide by default
     std::string datatype = "nucleotide";
     if (match_obj.size() == 4 && match_obj[3].length() > 0) {
         datatype = match_obj[3].str();
@@ -220,7 +220,7 @@ void Partition::parseSubsetDefinition(std::string &s) {
             std::string genetic_code_name = m[1].str();
             dt.setGeneticCodeFromName(genetic_code_name);
         } else if (datatype == "codon") {
-            dt.setCodon();// assumes standard
+            dt.setCodon(); // assumes standard
         } else if (datatype == "protein") {
             dt.setProtein();
         } else if (datatype == "nucleotide") {
@@ -354,9 +354,9 @@ void Partition::addSubsetRange(unsigned int subset_index, std::string range_defi
 
 void Partition::addSubset(unsigned int subset_index, std::string subset_definition) {
     std::vector<std::string> parts = split(subset_definition, ',');
-    for (const std::string& subset_component : parts) {
+    for (const std::string &subset_component : parts) {
         addSubsetRange(subset_index, subset_component);
     }
 }
 
-}// namespace strom
+} // namespace strom

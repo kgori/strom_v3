@@ -332,7 +332,7 @@ inline Node *TreeManip::findNextPreorder(Node *nd) {
 inline void TreeManip::refreshPreorder() {
     // Create a vector of Nodes in preorder sequence
     _tree->_preorder.clear();
-    _tree->_preorder.reserve(_tree->_nodes.size() - 1);// _preorder does not include the root node
+    _tree->_preorder.reserve(_tree->_nodes.size() - 1); // _preorder does not include the root node
 
     if (!_tree->_root) {
         return;
@@ -532,7 +532,7 @@ inline void TreeManip::buildFromNewick(const std::string &newick, bool rooted, b
     _tree = std::make_shared<Tree>();
     _tree->_is_rooted = rooted;
 
-    std::set<unsigned> used;// Ensure no two leaf nodes have the same number
+    std::set<unsigned> used; // Ensure no two leaf nodes have the same number
     unsigned curr_leaf = 0;
     unsigned num_edge_lengths = 0;
     unsigned curr_node_index = 0;
@@ -567,12 +567,12 @@ inline void TreeManip::buildFromNewick(const std::string &newick, bool rooted, b
         // Define some flags for keeping track of operations
         enum
         {
-            Prev_Tok_LParen = 0x01,// previous token was '('
-            Prev_Tok_RParen = 0x02,// previous token was ')'
-            Prev_Tok_Colon = 0x04, // previous token was ':'
-            Prev_Tok_Comma = 0x08, // previous token was ','
-            Prev_Tok_Name = 0x10,  // previous token was a node name
-            Prev_Tok_Edgelen = 0x20// previous token was an edge length
+            Prev_Tok_LParen = 0x01, // previous token was '('
+            Prev_Tok_RParen = 0x02, // previous token was ')'
+            Prev_Tok_Colon = 0x04,  // previous token was ':'
+            Prev_Tok_Comma = 0x08,  // previous token was ','
+            Prev_Tok_Name = 0x10,   // previous token was a node name
+            Prev_Tok_Edgelen = 0x20 // previous token was an edge length
         };
         auto previous = Prev_Tok_LParen;
 
@@ -765,7 +765,7 @@ inline void TreeManip::buildFromNewick(const std::string &newick, bool rooted, b
                         inside_unquoted_name = true;
                         node_name_position = position_in_string;
                     }
-            }// end of switch statement
+            } // end of switch statement
         }
 
         if (inside_unquoted_name) {
@@ -814,4 +814,4 @@ inline void TreeManip::storeSplits(std::set<Split> &splitset) {
     }
 }
 
-}// namespace strom
+} // namespace strom

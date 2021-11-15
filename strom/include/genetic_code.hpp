@@ -145,7 +145,7 @@ inline void GeneticCode::buildGeneticCodeTranslators() {
     }
 
     ensureGeneticCodeNameIsValid(_genetic_code_name);
-    std::string gcode_aa = _definitions[_genetic_code_name];// e.g. "KNKNTTTTRSRSIIMIQHQHPPPPRRRRLLLLEDEDAAAAGGGGVVVV*Y*YSSSS*CWCLFLF"
+    std::string gcode_aa = _definitions[_genetic_code_name]; // e.g. "KNKNTTTTRSRSIIMIQHQHPPPPRRRRLLLLEDEDAAAAGGGGVVVV*Y*YSSSS*CWCLFLF"
 
     int k = 0;
     int state_code = 0;
@@ -187,4 +187,4 @@ inline void GeneticCode::ensureGeneticCodeNameIsValid(const std::string &name) {
         throw XStrom(fmt::format(FMT_STRING("{:s} is not a recognized genetic code"), name));
     }
 }
-}// namespace strom
+} // namespace strom

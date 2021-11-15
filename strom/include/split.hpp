@@ -202,4 +202,4 @@ inline bool Split::conflictsWith(const Split &other) const {
     return !isCompatibleWith(other);
 }
 
-}// namespace strom
+} // namespace strom

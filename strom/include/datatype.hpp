@@ -156,4 +156,4 @@ inline std::string DataType::translateDataTypeToString(unsigned int datatype) {
     }
 }
 
-}// namespace strom
+} // namespace strom

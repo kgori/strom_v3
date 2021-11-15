@@ -115,10 +115,10 @@ inline void TreeSummary::readTreefile(const std::string &filename, unsigned int 
                         // splitset key was found in map, so need to add this tree's index to vector
                         iter->second.push_back(tree_index);
                     }
-                }// trees loop
-            }    // skip loop
-        }        //TREES block loop
-    }            // TAXA block loop
+                } // trees loop
+            }     // skip loop
+        }         //TREES block loop
+    }             // TAXA block loop
     nexusReader.DeleteBlocksFromFactories();
 }
 
@@ -152,4 +152,4 @@ inline void TreeSummary::showSummary() const {
     }
 }
 
-}// namespace strom
+} // namespace strom

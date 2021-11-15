@@ -24,4 +24,4 @@ private:
     std::string _msg;
 };
 
-}// namespace strom
+} // namespace strom
